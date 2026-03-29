@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: smart-food-safety-analyzer
+    runtime: python
+    plan: free
+    buildCommand: |
+      cd smart_food_safety_analyzer
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+      python manage.py seed_data
+    startCommand: cd smart_food_safety_analyzer && gunicorn config.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: smart-food-safety-analyzer.onrender.com
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: smart-food-safety-db
+          property: connectionString
+      - key: CLOUD_STORAGE_PROVIDER
+        value: local
+      - key: OCR_PROVIDER
+        value: tesseract
+
+databases:
+  - name: smart-food-safety-db
+    plan: free

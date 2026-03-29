@@ -4,12 +4,13 @@ services:
     runtime: python
     plan: free
     buildCommand: |
-      cd smart_food_safety_analyzer
-      pip install -r requirements.txt
-      python manage.py collectstatic --noinput
-      python manage.py migrate
-      python manage.py seed_data
-    startCommand: cd smart_food_safety_analyzer && gunicorn config.wsgi:application
+     pip install -r requirements.txt
+     python manage.py collectstatic --noinput
+     python manage.py migrate
+     python manage.py seed_data
+
+    startCommand: gunicorn config.wsgi:application
+
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9

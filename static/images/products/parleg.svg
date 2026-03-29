@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <rect width="640" height="420" rx="32" fill="#fff9db"/>
+  <rect x="86" y="62" width="218" height="290" rx="26" fill="#ffd43b" stroke="#1971c2" stroke-width="12"/>
+  <text x="194" y="140" text-anchor="middle" font-size="52" font-family="Arial" fill="#1971c2" font-weight="700">Parle-G</text>
+  <rect x="120" y="196" width="150" height="92" rx="16" fill="#ffffff" opacity="0.8"/>
+  <text x="194" y="250" text-anchor="middle" font-size="24" font-family="Arial" fill="#1971c2">Quick-energy biscuit</text>
+  <circle cx="448" cy="210" r="96" fill="#dbeafe"/>
+  <text x="448" y="190" text-anchor="middle" font-size="34" font-family="Arial" fill="#1d4ed8" font-weight="700">Iconic</text>
+  <text x="448" y="230" text-anchor="middle" font-size="28" font-family="Arial" fill="#1d4ed8">but sugary</text>
+  <text x="448" y="270" text-anchor="middle" font-size="22" font-family="Arial" fill="#1d4ed8">best occasionally</text>
+</svg>

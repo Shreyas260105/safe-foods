@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <rect width="640" height="420" rx="32" fill="#f7f4ea"/>
+  <rect x="86" y="62" width="210" height="290" rx="26" fill="#f0c808"/>
+  <rect x="110" y="90" width="162" height="78" rx="16" fill="#1f2937"/>
+  <text x="191" y="138" text-anchor="middle" font-size="32" font-family="Arial" fill="#fff" font-weight="700">Kellogg's</text>
+  <text x="191" y="232" text-anchor="middle" font-size="42" font-family="Arial" fill="#7f5539" font-weight="700">Oats</text>
+  <circle cx="446" cy="228" r="102" fill="#fef3c7"/>
+  <text x="446" y="196" text-anchor="middle" font-size="32" font-family="Arial" fill="#92400e" font-weight="700">High Protein</text>
+  <text x="446" y="236" text-anchor="middle" font-size="30" font-family="Arial" fill="#92400e">High Fibre</text>
+  <text x="446" y="280" text-anchor="middle" font-size="24" font-family="Arial" fill="#92400e">Great breakfast base</text>
+</svg>

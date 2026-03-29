@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <rect width="640" height="420" rx="32" fill="#fff4ec"/>
+  <rect x="82" y="74" width="214" height="268" rx="24" fill="#f4a261"/>
+  <rect x="102" y="94" width="174" height="70" rx="14" fill="#ffd166"/>
+  <text x="190" y="138" text-anchor="middle" font-size="34" font-family="Arial" fill="#7f1d1d" font-weight="700">Good Day</text>
+  <text x="190" y="224" text-anchor="middle" font-size="30" font-family="Arial" fill="#7f1d1d">Butter</text>
+  <circle cx="446" cy="206" r="100" fill="#fff0b3"/>
+  <text x="446" y="190" text-anchor="middle" font-size="34" font-family="Arial" fill="#92400e" font-weight="700">Sugar + Palm Fat</text>
+  <text x="446" y="234" text-anchor="middle" font-size="22" font-family="Arial" fill="#92400e">tea-time treat</text>
+  <text x="446" y="270" text-anchor="middle" font-size="22" font-family="Arial" fill="#92400e">not a daily snack</text>
+</svg>

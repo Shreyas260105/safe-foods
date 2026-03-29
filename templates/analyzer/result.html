@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+            <div>
+                <span class="eyebrow">Analysis report</span>
+                <h1 class="display-6 fw-bold mt-2 mb-1">{{ record.selected_product.name|default:'Uploaded Ingredient Label' }}</h1>
+                <p class="text-muted mb-0">Processed using {{ cloud.storage }} and {{ cloud.ocr }}</p>
+            </div>
+            <div class="d-flex gap-2 flex-wrap">
+                <a href="{% url 'analyzer:self_growth' %}" class="btn btn-outline-dark">Self Growth</a>
+                <a href="{% url 'analyzer:dashboard' %}" class="btn btn-outline-dark">Analyze another product</a>
+            </div>
+        </div>
+
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-4">
+                <div class="score-panel {{ record.classification|lower }} h-100">
+                    <div class="small text-uppercase opacity-75">Health Score</div>
+                    <div class="score-value">{{ record.health_score }}</div>
+                    <div class="status-chip large {{ record.classification|lower }}">{{ record.classification }}</div>
+                    <p class="mt-3 mb-0">{% if record.classification == 'Safe' %}Balanced ingredient profile with lower detected risk.{% elif record.classification == 'Moderate' %}Contains ingredients that are okay sometimes but worth watching.{% else %}Contains multiple high-risk markers and should be limited.{% endif %}</p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="section-card h-100">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-md-5">
+                            {% if record.selected_product and record.selected_product.image_url %}
+                            <div class="result-product-visual"><img src="{{ record.selected_product.image_url }}" alt="{{ record.selected_product.name }}" class="result-product-image"></div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-7">
+                            <div class="row g-3">
+                                <div class="col-md-6"><div class="metric-box harmful-box"><div class="metric-count">{{ harmful_items|length }}</div><div>Harmful ingredients</div></div></div>
+                                <div class="col-md-6"><div class="metric-box moderate-box"><div class="metric-count">{{ moderate_items|length }}</div><div>Moderate ingredients</div></div></div>
+                                <div class="col-md-6"><div class="metric-box safe-box"><div class="metric-count">{{ safe_items|length }}</div><div>Safe ingredients</div></div></div>
+                                <div class="col-md-6"><div class="metric-box neutral-box"><div class="metric-count">{{ normalized_ingredients|length }}</div><div>Detected labels</div></div></div>
+                            </div>
+                            {% if record.selected_product %}
+                            <div class="mt-3">
+                                <h2 class="h5 mb-1">Public watch-out</h2>
+                                <p class="text-muted mb-2">{{ record.selected_product.consumer_watchouts }}</p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    {% if record.selected_product.source_url %}<a href="{{ record.selected_product.source_url }}" target="_blank" rel="noopener" class="mini-tag source-link">Product source</a>{% endif %}
+                                    {% if record.selected_product.public_health_reference %}<a href="{{ record.selected_product.public_health_reference }}" target="_blank" rel="noopener" class="mini-tag source-link">Public discussion</a>{% endif %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+            <div class="col-lg-6">
+                <div class="section-card h-100">
+                    <h2 class="h4">Detected ingredient categories</h2>
+                    <div class="ingredient-group mt-3"><h3 class="h6 text-danger">Harmful</h3>{% for item in harmful_items %}<span class="ingredient-badge harmful">{{ item }}</span>{% empty %}<span class="text-muted small">No harmful ingredients matched from the dataset.</span>{% endfor %}</div>
+                    <div class="ingredient-group mt-4"><h3 class="h6 text-warning">Moderate</h3>{% for item in moderate_items %}<span class="ingredient-badge moderate">{{ item }}</span>{% empty %}<span class="text-muted small">No moderate-risk ingredients matched from the dataset.</span>{% endfor %}</div>
+                    <div class="ingredient-group mt-4"><h3 class="h6 text-success">Safe</h3>{% for item in safe_items %}<span class="ingredient-badge safe">{{ item }}</span>{% empty %}<span class="text-muted small">No safe ingredients matched from the dataset.</span>{% endfor %}</div>
+                    <hr>
+                    <h2 class="h5">Suggestions</h2>
+                    <p class="text-muted mb-0">{{ record.suggestions }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="section-card h-100">
+                    <h2 class="h4">OCR and normalized text</h2>
+                    <div class="mb-3"><label class="small text-uppercase text-muted">Extracted text</label><div class="text-box">{{ record.extracted_text|default:'No text captured.' }}</div></div>
+                    <div><label class="small text-uppercase text-muted">Normalized ingredients</label><div>{% for item in normalized_ingredients %}<span class="ingredient-badge neutral">{{ item }}</span>{% empty %}<span class="text-muted small">No normalized ingredients available.</span>{% endfor %}</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+            <div class="col-lg-7">
+                <div class="section-card h-100">
+                    <span class="eyebrow">Self Growth impact</span>
+                    <h2 class="h4 mt-2">Calories and body guidance used in this report</h2>
+                    {% if record.bmi %}
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-4"><div class="metric-box neutral-box"><div class="metric-count small-count">{{ record.bmi }}</div><div>BMI</div></div></div>
+                        <div class="col-md-4"><div class="metric-box neutral-box"><div class="metric-count small-count">{{ record.daily_calories }}</div><div>Daily calories</div></div></div>
+                        <div class="col-md-4"><div class="metric-box neutral-box"><div class="metric-count small-count">{{ record.protein_target_g }}g</div><div>Protein target</div></div></div>
+                    </div>
+                    <p class="mt-3 mb-2"><strong>Status:</strong> {{ record.bmi_status }}</p>
+                    <p class="text-muted mb-2">{{ record.wellness_summary }}</p>
+                    <p class="text-muted mb-3">Healthy weight range: <strong>{{ record.healthy_weight_min }} kg to {{ record.healthy_weight_max }} kg</strong>. Suggested target: <strong>{{ record.target_weight }} kg</strong>.</p>
+                    <div class="meal-list">{% for item in meal_plan_items %}<div class="meal-item">{{ item }}</div>{% endfor %}</div>
+                    {% else %}
+                    <p class="text-muted mb-0">This report used only food analysis because your Self Growth profile is not complete yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="section-card h-100">
+                    <span class="eyebrow">Protein support</span>
+                    <h2 class="h4 mt-2">Natural protein source ideas</h2>
+                    <div class="protein-panel mb-3"><h3 class="h6 text-success mb-3">Vegetarian</h3>{% for item in protein_data.veg %}<div class="protein-detail-row"><div><strong>{{ item.name }}</strong><div class="small text-muted">{{ item.benefit }}</div></div><span>{{ item.protein }}</span></div>{% endfor %}</div>
+                    <div class="protein-panel warm"><h3 class="h6 text-danger mb-3">Non-Vegetarian</h3>{% for item in protein_data.non_veg %}<div class="protein-detail-row"><div><strong>{{ item.name }}</strong><div class="small text-muted">{{ item.benefit }}</div></div><span>{{ item.protein }}</span></div>{% endfor %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

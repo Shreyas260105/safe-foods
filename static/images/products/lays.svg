@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <rect width="640" height="420" rx="32" fill="#fff6cc"/>
+  <path d="M94 80h220c38 0 66 28 66 66v120c0 38-28 66-66 66H124c-34 0-64-25-70-58L30 152c-8-40 23-72 64-72z" fill="#ffd60a" stroke="#f77f00" stroke-width="14"/>
+  <text x="210" y="210" text-anchor="middle" font-size="54" font-family="Arial" fill="#c1121f" font-weight="700">Lay's</text>
+  <text x="470" y="145" text-anchor="middle" font-size="34" font-family="Arial" fill="#7c4f00" font-weight="700">Food Pharmer</text>
+  <text x="470" y="183" text-anchor="middle" font-size="28" font-family="Arial" fill="#7c4f00">palm oil watch-out</text>
+  <circle cx="475" cy="250" r="76" fill="#f4a261" opacity="0.85"/>
+  <text x="475" y="258" text-anchor="middle" font-size="24" font-family="Arial" fill="#7c4f00">555 kcal</text>
+</svg>

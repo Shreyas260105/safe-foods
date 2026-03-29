@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-9">
+                <div class="glass-card p-4 shadow-lg">
+                    <span class="eyebrow">New account</span>
+                    <h1 class="h2 mt-2 mb-3">Create your personalized health profile</h1>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label">Name</label>{{ form.first_name }}</div>
+                            <div class="col-md-6"><label class="form-label">Username</label>{{ form.username }}</div>
+                            <div class="col-12"><label class="form-label">Email</label>{{ form.email }}</div>
+                            <div class="col-md-6"><label class="form-label">Password</label>{{ form.password1 }}</div>
+                            <div class="col-md-6"><label class="form-label">Confirm password</label>{{ form.password2 }}</div>
+                        </div>
+                        <button type="submit" class="btn btn-accent w-100 mt-4">Create Account</button>
+                    </form>
+                    <p class="text-muted small mt-3 mb-0">Already registered? <a href="{% url 'analyzer:login' %}">Login here</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

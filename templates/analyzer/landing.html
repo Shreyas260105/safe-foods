@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero-section py-5">
+    <div class="container py-5">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <span class="eyebrow">Personalized health website</span>
+                <h1 class="display-3 fw-bold mt-3">Track your body goals, then judge packaged food with context.</h1>
+                <p class="lead text-muted mt-3">Create your account, update your Self Growth profile, and let the system suggest calories, healthy weight range, meal direction, and better food choices from ingredient labels.</p>
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a class="btn btn-accent" href="{% url 'analyzer:register' %}">Start Personalizing</a>
+                    <a class="btn btn-outline-dark" href="{% url 'analyzer:login' %}">I already have an account</a>
+                </div>
+                <div class="row g-3 mt-4">
+                    <div class="col-md-4"><div class="architecture-step tall"><h3>1. Create Account</h3><p>Register once and keep your health profile in one place.</p></div></div>
+                    <div class="col-md-4"><div class="architecture-step tall"><h3>2. Self Growth</h3><p>Enter height, weight, and diet type to unlock calorie and protein guidance.</p></div></div>
+                    <div class="col-md-4"><div class="architecture-step tall"><h3>3. Analyze Foods</h3><p>Scan labels or select products and compare them to your personal goals.</p></div></div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="glass-card p-4 shadow-lg">
+                    <span class="eyebrow">Included</span>
+                    <h2 class="h3 mt-2">What the website gives you</h2>
+                    <div class="protein-panel mt-3">
+                        <div class="protein-row"><strong>Food Safety Score</strong><span>0 to 100</span></div>
+                        <div class="protein-row"><strong>Self Growth Panel</strong><span>BMI + calories</span></div>
+                        <div class="protein-row"><strong>Protein Guidance</strong><span>Veg + non-veg</span></div>
+                        <div class="protein-row"><strong>Product Library</strong><span>Top packaged foods</span></div>
+                    </div>
+                    <p class="small text-muted mt-3 mb-0">OCR provider: {{ cloud.ocr }}. Storage layer: {{ cloud.storage }}.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

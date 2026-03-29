@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8">
+                <div class="glass-card p-4 shadow-lg">
+                    <span class="eyebrow">Welcome back</span>
+                    <h1 class="h2 mt-2 mb-3">Login to your health dashboard</h1>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            {{ form.password }}
+                        </div>
+                        <button type="submit" class="btn btn-accent w-100">Login</button>
+                    </form>
+                    <p class="text-muted small mt-3 mb-0">Need an account? <a href="{% url 'analyzer:register' %}">Create one here</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

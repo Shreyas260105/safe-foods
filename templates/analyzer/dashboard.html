@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero-section py-5">
+    <div class="container py-4 position-relative">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <span class="eyebrow">Personalized food dashboard</span>
+                <h1 class="display-4 fw-bold mt-3 hero-title">Hi {{ request.user.first_name|default:request.user.username }}, let your food choices match your goals.</h1>
+                <p class="lead text-muted mt-3">Your food analysis now pulls from your saved Self Growth profile instead of asking for height and weight every time.</p>
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <div class="info-pill">Storage: {{ cloud.storage }}</div>
+                    <div class="info-pill">OCR: {{ cloud.ocr }}</div>
+                    <a class="info-pill text-decoration-none" href="{% url 'analyzer:self_growth' %}">Open Self Growth</a>
+                </div>
+                <div class="featured-strip mt-4">
+                    <div>
+                        <div class="small text-uppercase text-muted">Saved profile</div>
+                        {% if profile.weight_kg and profile.height_cm %}
+                        <h2 class="h4 mb-1">{{ profile.weight_kg }} kg / {{ profile.height_cm }} cm / {{ profile.get_diet_preference_display }}</h2>
+                        <p class="mb-0 text-muted">Target calories: {{ profile.daily_calories|default:'Not ready yet' }} | Protein target: {{ profile.protein_target_g|default:'Not ready yet' }}g</p>
+                        {% else %}
+                        <h2 class="h4 mb-1">Self Growth profile not complete</h2>
+                        <p class="mb-0 text-muted">Add your height and weight once, and every food report will become more personal.</p>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'analyzer:self_growth' %}" class="btn btn-accent">Self Growth</a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="glass-card p-4 shadow-lg analyzer-panel">
+                    <h3 class="h4 mb-1">Analyze a product</h3>
+                    <p class="text-muted small mb-3">Choose a product or upload an ingredients photo. Your saved Self Growth data will be used automatically.</p>
+                    <form method="post" action="{% url 'analyzer:analyze_food' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Choose a predefined product</label>
+                            {{ form.product }}
+                        </div>
+                        <div class="text-center text-muted my-3 fw-semibold">OR</div>
+                        <div class="mb-4">
+                            <label class="form-label">Upload ingredient label image</label>
+                            {{ form.ingredient_image }}
+                            <div class="form-text">Clear, bright label photos give better OCR results.</div>
+                        </div>
+                        <button type="submit" class="btn btn-accent w-100">Run Food Safety Analysis</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-5">
+    <div class="container">
+        <div class="section-card mb-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <div>
+                    <span class="eyebrow">Updated catalog</span>
+                    <h2 class="h3 mt-2 mb-0">Popular products with nutrition and public watch-outs</h2>
+                </div>
+                <span class="text-muted small">Tap a card to auto-select it</span>
+            </div>
+            <div class="row g-4">
+                {% for product in products %}
+                <div class="col-lg-3 col-md-6">
+                    <button type="button" class="product-picker-card text-start w-100 border-0" data-product-id="{{ product.id }}">
+                        <div class="product-image-wrap"><img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image"></div>
+                        <div class="product-copy">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <div><h3 class="h6 mb-1">{{ product.name }}</h3><p class="small text-muted mb-0">{{ product.brand }} / {{ product.category }}</p></div>
+                                <span class="mini-tag">Select</span>
+                            </div>
+                            <p class="small text-muted mb-2">{{ product.short_description }}</p>
+                            <div class="product-metrics"><span>{{ product.calories_per_100g }} kcal</span><span>{{ product.sugar_per_100g }}g sugar</span><span>{{ product.protein_per_100g }}g protein</span></div>
+                            <p class="small highlight-note mb-0">{{ product.consumer_watchouts|truncatechars:120 }}</p>
+                        </div>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="section-card h-100">
+                    <span class="eyebrow">Recent analyses</span>
+                    <h2 class="h3 mt-2">Your latest reports</h2>
+                    <div class="timeline-list mt-4">
+                        {% for item in recent_analyses %}
+                        <a class="timeline-item text-decoration-none" href="{% url 'analyzer:analysis_result' item.id %}">
+                            <div><strong>{{ item.selected_product.name|default:'Uploaded Label' }}</strong><div class="small text-muted">{{ item.created_at|date:'d M Y, h:i A' }}</div></div>
+                            <span class="status-chip {{ item.classification|lower }}">{{ item.classification }}</span>
+                        </a>
+                        {% empty %}
+                        <p class="text-muted mb-0">No analysis yet. Choose a product card or upload a label to start.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="section-card h-100">
+                    <span class="eyebrow">Protein library</span>
+                    <h2 class="h3 mt-2">Natural protein sources</h2>
+                    <div class="row g-3 mt-1">
+                        <div class="col-12"><div class="protein-panel"><h3 class="h6 text-success mb-3">Vegetarian</h3>{% for item in protein_data.veg %}<div class="protein-row"><strong>{{ item.name }}</strong><span>{{ item.protein }}</span></div>{% endfor %}</div></div>
+                        <div class="col-12"><div class="protein-panel warm"><h3 class="h6 text-danger mb-3">Non-Vegetarian</h3>{% for item in protein_data.non_veg %}<div class="protein-row"><strong>{{ item.name }}</strong><span>{{ item.protein }}</span></div>{% endfor %}</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.querySelectorAll('.product-picker-card').forEach(function(card) {
+        card.addEventListener('click', function() {
+            var select = document.getElementById('product-select');
+            if (select) {
+                select.value = card.dataset.productId;
+                select.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.classList.add('selected-pulse');
+                setTimeout(function() { card.classList.remove('selected-pulse'); }, 800);
+            }
+        });
+    });
+</script>
+{% endblock %}

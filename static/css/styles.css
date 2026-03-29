@@ -1,0 +1,395 @@
+:root {
+    --bg: #f7f4ee;
+    --surface: rgba(255, 255, 255, 0.84);
+    --surface-strong: rgba(255, 255, 255, 0.94);
+    --ink: #1f2933;
+    --muted: #677281;
+    --accent: #0f766e;
+    --accent-dark: #115e59;
+    --accent-soft: #d9f3ef;
+    --warm: #f59e0b;
+    --danger: #dc2626;
+    --safe: #15803d;
+    --slate: #475569;
+    --card-shadow: 0 24px 60px rgba(31, 41, 51, 0.10);
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(245, 158, 11, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(15, 118, 110, 0.18), transparent 24%),
+        linear-gradient(180deg, #fcfaf5 0%, #f3efe6 100%);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.page-orb {
+    position: fixed;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.orb-one {
+    background: #f59e0b;
+    top: -120px;
+    right: -80px;
+}
+
+.orb-two {
+    background: #2dd4bf;
+    bottom: -120px;
+    left: -90px;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+h1, h2, h3, h4, .navbar-brand {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.topbar {
+    background: linear-gradient(135deg, #163635, #0f766e);
+    box-shadow: 0 8px 28px rgba(15, 118, 110, 0.22);
+}
+
+.hero-section {
+    position: relative;
+}
+
+.hero-title {
+    max-width: 10ch;
+}
+
+.eyebrow {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.74rem;
+    color: var(--accent-dark);
+    font-weight: 700;
+}
+
+.glass-card,
+.section-card,
+.score-panel {
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 28px;
+    backdrop-filter: blur(14px);
+    box-shadow: var(--card-shadow);
+}
+
+.section-card,
+.score-panel {
+    padding: 1.6rem;
+}
+
+.info-pill,
+.mini-tag,
+.status-chip,
+.ingredient-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.info-pill,
+.mini-tag,
+.source-link {
+    background: rgba(255, 255, 255, 0.78);
+    padding: 0.65rem 1rem;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.featured-strip {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    background: var(--surface-strong);
+    border-radius: 22px;
+    border: 1px solid rgba(15, 118, 110, 0.10);
+    box-shadow: 0 14px 35px rgba(31, 41, 51, 0.08);
+}
+
+.featured-thumb {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 20px;
+    background: #fff;
+}
+
+.analyzer-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.analyzer-panel::after {
+    content: '';
+    position: absolute;
+    inset: auto -30px -30px auto;
+    width: 130px;
+    height: 130px;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.16), transparent 70%);
+}
+
+.wellness-box,
+.protein-panel {
+    padding: 1rem;
+    background: rgba(248, 250, 252, 0.82);
+    border-radius: 22px;
+    border: 1px solid rgba(15, 118, 110, 0.10);
+}
+
+.protein-panel.warm {
+    background: rgba(255, 247, 237, 0.88);
+}
+
+.btn-accent {
+    background: linear-gradient(135deg, var(--accent), #14b8a6);
+    color: #fff;
+    border: none;
+    padding: 0.9rem 1.2rem;
+    font-weight: 700;
+    box-shadow: 0 14px 28px rgba(20, 184, 166, 0.24);
+}
+
+.btn-accent:hover {
+    background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+    color: #fff;
+}
+
+.product-picker-card,
+.architecture-step,
+.metric-box,
+.timeline-item,
+.text-box,
+.result-product-visual,
+.meal-item {
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(15, 118, 110, 0.09);
+}
+
+.product-picker-card,
+.architecture-step,
+.metric-box,
+.text-box,
+.meal-item,
+.result-product-visual {
+    padding: 1rem;
+}
+
+.product-picker-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 14px 28px rgba(31, 41, 51, 0.06);
+}
+
+.product-picker-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(15, 118, 110, 0.35);
+    box-shadow: 0 20px 42px rgba(31, 41, 51, 0.12);
+}
+
+.selected-pulse {
+    animation: pulseCard 0.8s ease;
+}
+
+@keyframes pulseCard {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.product-image-wrap {
+    aspect-ratio: 4 / 3;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff;
+    margin-bottom: 1rem;
+}
+
+.product-image,
+.result-product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-copy h3 {
+    min-height: 2.4em;
+}
+
+.product-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.product-metrics span {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.highlight-note {
+    color: #7c2d12;
+}
+
+.architecture-step.tall {
+    min-height: 165px;
+}
+
+.status-chip {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.84rem;
+}
+
+.status-chip.safe,
+.ingredient-badge.safe,
+.safe-box {
+    background: rgba(34, 197, 94, 0.14);
+    color: var(--safe);
+}
+
+.status-chip.moderate,
+.ingredient-badge.moderate,
+.moderate-box {
+    background: rgba(245, 158, 11, 0.18);
+    color: #b45309;
+}
+
+.status-chip.harmful,
+.ingredient-badge.harmful,
+.harmful-box {
+    background: rgba(239, 68, 68, 0.14);
+    color: var(--danger);
+}
+
+.neutral-box {
+    background: rgba(148, 163, 184, 0.12);
+    color: var(--slate);
+}
+
+.status-chip.large {
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+}
+
+.score-panel.safe {
+    background: linear-gradient(180deg, rgba(220, 252, 231, 0.92), rgba(255, 255, 255, 0.92));
+}
+
+.score-panel.moderate {
+    background: linear-gradient(180deg, rgba(254, 243, 199, 0.96), rgba(255, 255, 255, 0.92));
+}
+
+.score-panel.harmful {
+    background: linear-gradient(180deg, rgba(254, 226, 226, 0.96), rgba(255, 255, 255, 0.92));
+}
+
+.score-value,
+.metric-count {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+}
+
+.score-value {
+    font-size: 5rem;
+    line-height: 1;
+    margin: 0.5rem 0 1rem;
+}
+
+.metric-count {
+    font-size: 2rem;
+}
+
+.metric-count.small-count {
+    font-size: 1.5rem;
+}
+
+.ingredient-badge {
+    padding: 0.5rem 0.85rem;
+    margin: 0.25rem 0.25rem 0 0;
+}
+
+.ingredient-badge.neutral {
+    background: rgba(148, 163, 184, 0.14);
+    color: #334155;
+}
+
+.text-box {
+    min-height: 120px;
+    color: var(--muted);
+    white-space: pre-wrap;
+}
+
+.protein-row,
+.protein-detail-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px dashed rgba(100, 116, 139, 0.25);
+}
+
+.protein-row:last-child,
+.protein-detail-row:last-child {
+    border-bottom: 0;
+}
+
+.result-product-visual {
+    min-height: 220px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(240, 253, 250, 0.92));
+}
+
+.meal-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.meal-item {
+    background: rgba(240, 253, 250, 0.9);
+}
+
+@media (max-width: 991px) {
+    .hero-title {
+        max-width: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .score-value {
+        font-size: 4rem;
+    }
+
+    .section-card,
+    .score-panel,
+    .glass-card,
+    .product-picker-card {
+        border-radius: 20px;
+    }
+
+    .featured-strip {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

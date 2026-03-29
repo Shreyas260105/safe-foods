@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <rect width="640" height="420" rx="32" fill="#f6f0ff"/>
+  <rect x="88" y="58" width="214" height="302" rx="26" fill="#6d28d9"/>
+  <circle cx="194" cy="146" r="52" fill="#7c3aed" stroke="#fbbf24" stroke-width="8"/>
+  <text x="194" y="156" text-anchor="middle" font-size="28" font-family="Arial" fill="#fff" font-weight="700">B</text>
+  <text x="194" y="242" text-anchor="middle" font-size="34" font-family="Arial" fill="#fff" font-weight="700">Bournvita</text>
+  <circle cx="456" cy="210" r="102" fill="#ede9fe"/>
+  <text x="456" y="184" text-anchor="middle" font-size="34" font-family="Arial" fill="#5b21b6" font-weight="700">2023 debate</text>
+  <text x="456" y="224" text-anchor="middle" font-size="28" font-family="Arial" fill="#5b21b6">32.2g sugar</text>
+  <text x="456" y="264" text-anchor="middle" font-size="20" font-family="Arial" fill="#5b21b6">after reduction</text>
+</svg>

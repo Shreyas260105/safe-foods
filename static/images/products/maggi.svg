@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <rect width="640" height="420" rx="32" fill="#fff4d6"/>
+  <rect x="58" y="45" width="210" height="330" rx="22" fill="#ffd33d" stroke="#e28413" stroke-width="12"/>
+  <rect x="75" y="78" width="176" height="70" rx="12" fill="#d62828"/>
+  <text x="163" y="123" text-anchor="middle" font-size="40" font-family="Arial" fill="white" font-weight="700">MAGGI</text>
+  <text x="163" y="192" text-anchor="middle" font-size="30" font-family="Arial" fill="#5f0f40" font-weight="700">2-Minute</text>
+  <text x="163" y="232" text-anchor="middle" font-size="26" font-family="Arial" fill="#5f0f40">Masala</text>
+  <circle cx="440" cy="210" r="112" fill="#f77f00"/>
+  <path d="M360 220c35-52 87-72 155-44" stroke="#ffe8a3" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M352 245c44-38 109-50 170-8" stroke="#fff4d6" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <text x="425" y="80" font-size="34" font-family="Arial" fill="#7a3e00" font-weight="700">High Sodium Alert</text>
+  <text x="425" y="340" font-size="24" font-family="Arial" fill="#7a3e00">Instant noodles</text>
+</svg>

@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: smart-food-safety-analyzer
+    name: safebite
     runtime: python
     plan: free
     buildCommand: |
@@ -15,12 +15,12 @@ services:
       - key: DJANGO_DEBUG
         value: "False"
       - key: DJANGO_ALLOWED_HOSTS
-        value: smart-food-safety-analyzer.onrender.com
+        value: safebite.onrender.com
       - key: DJANGO_SECRET_KEY
         generateValue: true
       - key: DATABASE_URL
         fromDatabase:
-          name: smart-food-safety-db
+          name: safebite-db
           property: connectionString
       - key: CLOUD_STORAGE_PROVIDER
         value: local
@@ -28,5 +28,5 @@ services:
         value: tesseract
 
 databases:
-  - name: smart-food-safety-db
+  - name: safebite-db
     plan: free
